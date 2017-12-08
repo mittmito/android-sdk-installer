@@ -123,7 +123,7 @@ licenses () {
 }
 
 get_needed_packages () {
-  sdkmanager --list --verbose |\
+  sdkmanager --list --include_obsolete --verbose |\
     # This is a hack as 25.2.4- tools do not correctly list paths for sdkmanager
     # grep -Riwo -e "path.*>" $ANDROID_STORE | awk -F'path="' -F'"' {'print $2'} | sort | uniq |\
     # Filter packages
