@@ -9,9 +9,6 @@ if [[ `uname` == 'Darwin' ]]; then
     os=osx
 fi
 
-# Do not move to 25.2.5 just yet
-# It has backwards incompatible changes (i.e. completely deprecating android/emulator)
-
 # SDK Tools
 # Please refer to https://dl.google.com/android/repository/repository2-1.xml
 
@@ -124,8 +121,6 @@ licenses () {
 
 get_needed_packages () {
   sdkmanager --list --include_obsolete --verbose |\
-    # This is a hack as 25.2.4- tools do not correctly list paths for sdkmanager
-    # grep -Riwo -e "path.*>" $ANDROID_STORE | awk -F'path="' -F'"' {'print $2'} | sort | uniq |\
     # Filter packages
     egrep '^\S+'      |\
     sed -E '/(---)/d'  |\
